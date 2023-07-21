@@ -15,9 +15,11 @@ def process_image():
         # Check the state of the switch (show_text) to determine the type of image processing
         if show_text.get():
             # Apply one type of image processing algorithm (e.g., convert to grayscale)
+            # R-CNN
             processed_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         else:
             # Apply a different type of image processing algorithm (e.g., apply edge detection)
+            # Yolo-V5
             processed_image = cv2.Canny(image, 100, 200)
 
         try:
