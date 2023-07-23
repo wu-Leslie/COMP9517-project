@@ -4,11 +4,15 @@ import cv2
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 
-WIDTH = 800
-HEIGHT = 500
+# Define some global variables
+WIDTH = 900
+HEIGHT = 620
+INPUT_IMAGE_PATH = None
+
 def process_image():
     file_path = filedialog.askopenfilename()
     if file_path:
+        INPUT_IMAGE_PATH = file_path
         image = cv2.imread(file_path)
         # Apply our model here
         
@@ -29,10 +33,12 @@ def process_image():
             
             # Display the original image on the left (ax1)
             ax1.imshow(image)
+            ax1.set_title('Original')
             ax1.axis('off')  # Hide axis ticks and labels
             
             # Display the processed image on the right (ax2)
             ax2.imshow(processed_image, cmap='gray')
+            ax2.set_title('Processed')
             ax2.axis('off')  # Hide axis ticks and labels
 
             # Adjust the spacing between the images
@@ -58,6 +64,20 @@ def update_text():
     else:
         # result_label.config(text="Processing Complete - Yolo-V5")
         switch_label.config(text="Method of Image Processing: Yolo-V5")
+        
+
+def download_processed_image():
+    if INPUT_IMAGE_PATH is None:
+        error_message = f"Error: No file has put in yet, please select an image first."
+        error_label.config(text=error_message, wraplength=WIDTH/2)
+        return
+    file_path = filedialog.asksaveasfilename(defaultextension=".jpg", filetypes=[("JPEG", "*.jpg")])
+    if file_path:
+        processed_image = cv2.imread("processed_image.jpg")
+        cv2.imwrite(file_path, processed_image)
+    else:
+        error_message = f"Error: Failed to save image, file path are incorrect, please try again."
+        error_label.config(text=error_message, wraplength=WIDTH/2)
         
 # Create the main GUI window
 root = tk.Tk()
@@ -96,6 +116,18 @@ switch_label = tk.Label(root, text="Method of Image Processing: R-CNN")
 switch_label.pack(side=tk.LEFT)
 switch_button = tk.Checkbutton(root, variable=show_text, command=update_text)
 switch_button.pack(side=tk.LEFT)
+
+# Create a button to download the processed image
+download_button = tk.Button(root, text="Download Processed Image", command=download_processed_image)
+download_button.pack(pady=10)
+
+# Create a footer
+footer_frame = tk.Frame(root, bd=2, relief="groove")
+footer_frame.pack(side=tk.BOTTOM, fill="x")
+# Create a label for footer message
+footer_label = tk.Label(footer_frame, text="COMP9517 Group Project by Raphael, Lesile, Toran, ", fg="gray")
+footer_label.pack(pady=5, fill="x")
+
 
 # Start the GUI event loop
 root.mainloop()
