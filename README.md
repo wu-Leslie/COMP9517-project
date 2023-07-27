@@ -23,7 +23,9 @@ run the file image_preprocess.ipynb in folder demo to preprocess the dataset
 
 run the file image_Augmentation.ipynb in folder demo to augmentation the dataset
 
-4. ...
+4. when after the trainning delete all preprocess image
+
+run the file delete_process_image.ipynb in folder demo to delete the dataset preprocess
 
 
 
