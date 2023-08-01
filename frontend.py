@@ -173,7 +173,7 @@ download_button.pack(pady=10)
 footer_frame = tk.Frame(root, bd=2, relief="groove")
 footer_frame.pack(side=tk.BOTTOM, fill="x")
 # Create a label for footer message
-footer_label = tk.Label(footer_frame, text="COMP9517 Group Project by Raphael, Lesile, Toran, Xinran, Lili", fg="gray")
+footer_label = tk.Label(footer_frame, text="COMP9517 Group Project by Raphael, Lesile, Toran, Xinran, Qi", fg="gray")
 footer_label.pack(pady=5, fill="x")
 
 
