@@ -67,7 +67,6 @@ def process_image():
         
         # Check the state of the switch (show_text) to determine the type of image processing
         if show_text.get():
-            # Apply one type of image processing algorithm (e.g., convert to grayscale)
             # R-CNN
             processed_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             def process_RCNN():
@@ -85,7 +84,6 @@ def process_image():
             # Schedule the process_yolo function to be called after a short delay
             root.after(100, process_RCNN)
         else:
-            # Apply a different type of image processing algorithm (e.g., apply edge detection)
             # Yolo-V5
 
             def process_yolo():
